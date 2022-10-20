@@ -9,8 +9,8 @@ IoTコンポストトイレのハードウェアに組み込むFirebaseプログ
 ## Requirement
 | name | version |
 | ------------- | ------------- |
-| python | 3.x |
-| firebase-admin | 5.4.0 |
+| python(global) | 3.x |
+| firebase-admin(global) | 5.4.0 |
 
 ## Getting Started
 
