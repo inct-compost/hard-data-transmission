@@ -20,7 +20,7 @@ def add_admin(id: str, temperature: float, humidity: float):
   Returns:
 
   Notes:
-    run command | `python main.py add_sensing`
+    run command | `python main.py add_admin -i hardwareID 1 1`
   """
   import datetime
   from firebase_admin import firestore
@@ -29,13 +29,13 @@ def add_admin(id: str, temperature: float, humidity: float):
     # 今日の日時を取得し保存
     nowDate = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
     # nowDate = datetime.datetime(2017, 4, 4, 9, 5, 28)
-    
+
     # 今日の年月日を取得し保存(YYYYMMDD)
     month = '0' + str(nowDate.month)
     day = '0' + str(nowDate.day)
     date = str(nowDate.year) + month[-2:] + day[-2:]
     print(date)
-    
+
     # 現在の時間（時）を取得し2桁で保存
     hour = '0' + str(nowDate.hour)
     # 現在の時間（分）を取得し、15の倍数でどの値に一番近いかを求め2桁で保存
@@ -54,7 +54,7 @@ def add_admin(id: str, temperature: float, humidity: float):
     db = firestore.client()
     ref = db.collection('sensingData').document(id).collection(date).document(time)
     ref.set({
-      u'date': datetime.datetime(str(nowDate.year), str(nowDate.month), str(nowDate.day), 9, 55, 28),
+      u'date': nowDate,
       u'temperature': temperature,
       u'humidity': humidity,
     })
