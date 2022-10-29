@@ -2,8 +2,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import auth
 import argparse
-from defs.add_sensing import add_admin
+from defs.add_sensing import add_admin, add
 from defs.get_sensing import get
+from defs.decode_token import check_token
 
 cred = credentials.Certificate("./keys/serviceAccountKey.key.json") # ダウンロードした秘密鍵
 options = {

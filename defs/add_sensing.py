@@ -9,7 +9,7 @@ def add():
   Notes:
     run command | `python main.py add_sensing`
   """
-  print('hello')
+
 
 def add_admin(id: str, temperature: float, humidity: float):
   """
