@@ -1,21 +1,8 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import auth
 import argparse
-from defs.add_sensing import add_admin, add
+from defs.add_sensing import add
 from defs.get_sensing import get
 from defs.verify_jwt_token import verify_jwt_token
-
-cred = credentials.Certificate("./keys/serviceAccountKey.key.json") # ダウンロードした秘密鍵
-options = {
-  'serviceAccountId': 'firebase-adminsdk-6hx2q@research2022-5j.iam.gserviceaccount.com',
-}
-firebase_admin.initialize_app(cred)
-
-uid = '5GU5x3Bi4LYR7pSOOkiofS0s24H2'
-custom_token = auth.create_custom_token(uid)
-
-#print(custom_token)
+from defs.get_jwt_token import get_jwt_token
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

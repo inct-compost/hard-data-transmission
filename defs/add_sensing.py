@@ -1,4 +1,4 @@
-def add():
+def add(temp: float, hum: float):
   """
   データを追加する
 
@@ -7,34 +7,26 @@ def add():
   Returns:
 
   Notes:
-    run command | `python main.py add_sensing`
-  """
-
-
-def add_admin(id: str, temperature: float, humidity: float):
-  """
-  アドミン権限を利用してデータを追加する
-
-  Parameters:
-
-  Returns:
-
-  Notes:
-    run command | `python main.py add_admin -i hardwareID 1 1`
+    run command | `python main.py add -i [temp] [hum]`
   """
   import datetime
-  from firebase_admin import firestore
+  import json
+  import os
+  import requests
 
-  if (isinstance(id, str) and isinstance(temperature, float) and isinstance(humidity, float)):
+  with open(os.getcwd() + '\json\id_token.json') as f:
+    load_data = json.load(f)
+    id_token = load_data['id_token']
+
+  if (id_token != 'NULL' and isinstance(temp, float) and isinstance(hum, float)):
     # 今日の日時を取得し保存
     nowDate = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
-    # nowDate = datetime.datetime(2017, 4, 4, 9, 5, 28)
 
     # 今日の年月日を取得し保存(YYYYMMDD)
     month = '0' + str(nowDate.month)
     day = '0' + str(nowDate.day)
     date = str(nowDate.year) + month[-2:] + day[-2:]
-    print(date)
+    # print(date)
 
     # 現在の時間（時）を取得し2桁で保存
     hour = '0' + str(nowDate.hour)
@@ -47,16 +39,24 @@ def add_admin(id: str, temperature: float, humidity: float):
 
     # 現在の時分を保存(HHMM)
     time = hour[-2:] + minute[-2:]
-    print(time)
+    # print(time)
 
-    print(f'Add to sensingData/{id}/{date}/{time}')
+    print(f'Add to {date} > {time}')
 
-    db = firestore.client()
-    ref = db.collection('sensingData').document(id).collection(date).document(time)
-    ref.set({
-      u'date': nowDate,
-      u'temperature': temperature,
-      u'humidity': humidity,
-    })
+    req_body={
+      'token': id_token,
+      'datetime': {
+        'date': date,
+        'time': time
+      },
+      'data': {
+        'date': nowDate.isoformat(),
+        'temperature': temp,
+        'humidity': hum,
+      }
+    }
+
+    res = requests.post('http://localhost:5001/research2022-5j/us-central1/addSensingData', json=req_body)
+    print(f'{res.status_code}: {res.text}')
   else:
     print('input variables type not match')
