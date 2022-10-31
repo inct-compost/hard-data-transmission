@@ -1,6 +1,9 @@
 # serviceAccountKey
 *key.json
 
+# json
+json/id_token.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
