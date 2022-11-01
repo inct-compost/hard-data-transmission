@@ -1,4 +1,4 @@
-def verify_jwt_token(jwt_token: str):
+def verify_jwt_token():
   """
   発行されたJWTトークンを検証し、Idトークンを含んだjsonファイルを生成する
 
@@ -10,21 +10,12 @@ def verify_jwt_token(jwt_token: str):
     失敗: False
 
   Notes:
-    run command | `python main.py verify_jwt_token -i [jwt]`
+    run command | `python main.py verify_jwt_token`
   """
-  import json
   import requests
-  import os
+  from defs.control_json import load_jwt_token, dump_token_json
 
-  def dumpJson(data):
-    """
-    引数のjsonデータをjsonファイルとして出力する
-
-    Parameters:
-      `data`: jsonデータ
-    """
-    with open(os.getcwd() + '\json\id_token.json', 'w') as f:
-      json.dump(data, f, ensure_ascii=False, indent=2)
+  jwt_token = load_jwt_token()
 
   payload = {
     'token': jwt_token,
@@ -40,12 +31,12 @@ def verify_jwt_token(jwt_token: str):
       'jwt_token': jwt_token,
       'id_token': res.json()['idToken'],
     }
-    dumpJson(json_data)
+    dump_token_json(json_data)
     return True
   else:
     json_data = {
       'jwt_token': jwt_token,
       'id_token': 'NULL',
     }
-    dumpJson(json_data)
+    dump_token_json(json_data)
     return False
