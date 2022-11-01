@@ -2,7 +2,8 @@
 *key.json
 
 # json
-json/id_token.json
+json/token.json
+json/login_params.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
