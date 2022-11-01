@@ -10,13 +10,10 @@ def add(temp: float, hum: float):
     run command | `python main.py add -i [temp] [hum]`
   """
   import datetime
-  import json
-  import os
   import requests
+  from defs.control_json import load_id_token
 
-  with open(os.getcwd() + '\json\id_token.json') as f:
-    load_data = json.load(f)
-    id_token = load_data['id_token']
+  id_token = load_id_token()
 
   if (id_token != 'NULL' and isinstance(temp, float) and isinstance(hum, float)):
     # 今日の日時を取得し保存
@@ -41,7 +38,7 @@ def add(temp: float, hum: float):
     time = hour[-2:] + minute[-2:]
     # print(time)
 
-    print(f'Add to {date} > {time}')
+    print(f'Add to sensingData/[id]/{date}/{time}')
 
     req_body={
       'token': id_token,
