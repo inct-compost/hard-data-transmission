@@ -1,7 +1,5 @@
 import argparse
 from defs.add_sensing import add
-from defs.verify_jwt_token import verify_jwt_token
-from defs.get_jwt_token import get_jwt_token
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
