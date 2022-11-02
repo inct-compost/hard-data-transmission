@@ -38,7 +38,7 @@ def add(temp: float, hum: float):
     time = hour[-2:] + minute[-2:]
     # print(time)
 
-    print(f'Add to sensingData/[id]/{date}/{time}')
+    print(f'RUN | Add to sensingData/[id]/{date}/{time}')
 
     req_body={
       'token': id_token,
@@ -54,6 +54,6 @@ def add(temp: float, hum: float):
     }
 
     res = requests.post('https://us-central1-research2022-5j.cloudfunctions.net/addSensingData', json=req_body)
-    print(f'{res.status_code}: {res.text}')
+    print(f'STATUS | {res.status_code}: {res.text}')
   else:
-    print('input variables type not match')
+    print('WARN | input variables type not match')
