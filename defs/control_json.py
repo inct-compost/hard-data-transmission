@@ -9,7 +9,7 @@ def load_login_params():
   import os
 
   # login_params.jsonを開く
-  with open(os.getcwd() + '\json\login_params.json') as f:
+  with open(os.getcwd() + '/json/login_params.json') as f:
     # jsonデータを取得
     load_data = json.load(f)
     return load_data
@@ -26,7 +26,7 @@ def load_jwt_token():
   from defs.get_jwt_token import get_jwt_token
 
   # token.jsonを開き、データを取得
-  with open(os.getcwd() + '\json\/token.json') as f:
+  with open(os.getcwd() + '/json/token.json') as f:
     load_data = json.load(f)
 
   # jwt_token が存在する場合その値を返す
@@ -36,7 +36,7 @@ def load_jwt_token():
   else:
     get_jwt_token()
     # token.jsonを開き、データを取得し返す
-    with open(os.getcwd() + '\json\/token.json') as f:
+    with open(os.getcwd() + '/json/token.json') as f:
       load_data = json.load(f)
       return load_data['jwt_token']
 
@@ -53,7 +53,7 @@ def load_id_token():
   from defs.verify_jwt_token import verify_jwt_token
 
   # token.jsonを開き、データを取得
-  with open(os.getcwd() + '\json\/token.json') as f:
+  with open(os.getcwd() + '/json/token.json') as f:
     load_data = json.load(f)
 
   # id_token が存在する場合その値を返す
@@ -64,7 +64,7 @@ def load_id_token():
     get_jwt_token()
     verify_jwt_token()
     # token.jsonを開き、データを取得し返す
-    with open(os.getcwd() + '\json\/token.json') as f:
+    with open(os.getcwd() + '/json/token.json') as f:
       load_data = json.load(f)
       return load_data['id_token']
 
@@ -79,5 +79,5 @@ def dump_token_json(data):
   import os
 
   # token.jsonをを編集状態で開き、引数をjsonファイルにエクスポート
-  with open(os.getcwd() + '\json\/token.json', 'w') as f:
+  with open(os.getcwd() + '/json/token.json', 'w') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
