@@ -30,7 +30,7 @@ def get_jwt_token():
     'pass': login_params['pass']
   }
 
-  res = requests.get('http://localhost:5001/research2022-5j/us-central1/generateCustomToken', params = payload)
+  res = requests.get('https://us-central1-research2022-5j.cloudfunctions.net/generateCustomToken', params = payload)
   # print(res.text)
 
   if (res.status_code == 200):

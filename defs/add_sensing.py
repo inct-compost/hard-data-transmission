@@ -53,7 +53,7 @@ def add(temp: float, hum: float):
       }
     }
 
-    res = requests.post('http://localhost:5001/research2022-5j/us-central1/addSensingData', json=req_body)
+    res = requests.post('https://us-central1-research2022-5j.cloudfunctions.net/addSensingData', json=req_body)
     print(f'{res.status_code}: {res.text}')
   else:
     print('input variables type not match')
