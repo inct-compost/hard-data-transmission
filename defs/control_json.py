@@ -30,10 +30,11 @@ def load_jwt_token():
     load_data = json.load(f)
 
   # jwt_token が存在する場合その値を返す
-  if ('load_data["jwt_token"]' in locals()):
+  if ('jwt_token' in load_data):
     return load_data['jwt_token']
   # 存在しなかった場合は get_jwt_token を実行し、jwt_token を発行処理を行う
   else:
+    print('Cannot found load_data["jwt_token"]... Run re-request')
     get_jwt_token()
     # token.jsonを開き、データを取得し返す
     with open(os.getcwd() + '/json/token.json') as f:
@@ -57,10 +58,11 @@ def load_id_token():
     load_data = json.load(f)
 
   # id_token が存在する場合その値を返す
-  if ('load_data["id_token"]' in locals()):
+  if ('id_token' in load_data):
     return load_data['id_token']
   # 存在しなかった場合は get_jwt_token と verify_jwt_token を実行し、id_token を発行処理を行う
   else:
+    print('Cannot found load_data["id_token"]... Run re-request')
     get_jwt_token()
     verify_jwt_token()
     # token.jsonを開き、データを取得し返す
