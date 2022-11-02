@@ -4,8 +4,8 @@
 </p>
  -->
 ## Description
-IoTコンポストトイレのハードウェアに組み込むプログラム
-データの追加
+IoTコンポストトイレのハードウェアに組み込むプログラム<br>
+Firestoreへのデータの追加処理とFirebaseにアクセスするための認証用プログラム
 
 ## Requirement
 | name | version |
