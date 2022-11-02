@@ -4,16 +4,47 @@
 </p>
  -->
 ## Description
-IoTコンポストトイレのハードウェアに組み込むFirebaseプログラム
+IoTコンポストトイレのハードウェアに組み込むプログラム
+データの追加
 
 ## Requirement
 | name | version |
 | ------------- | ------------- |
 | python(global) | 3.x |
-| firebase-admin(global) | 5.4.0 |
+| netifaces | 0.11.0 |
 
 ## Getting Started
+### 1. Install package
+```powershell
+pip install netifaces
+```
 
+### 2. Add json files
+#### 2-1. touch file
+```powershell
+cd json 
+```
 
-## Deploy Service
+```powershell
+touch login_params.json token.json
+```
 
+#### 2-2. Edit json file
+**`login_params.json`**
+```json
+{
+  "id": "[hardware-id]",
+  "pass": "[password]"
+}
+```
+
+**`token.json`**
+```json
+{}
+```
+
+## How to use
+### Add sensing data
+```powershell
+python main.py add -i [temp] [hum]
+```
