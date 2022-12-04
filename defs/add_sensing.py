@@ -13,6 +13,20 @@ def add(temp: float, hum: float):
   import requests
   from defs.control_json import load_id_token
 
+  def req(req_body: object):
+    """
+    データを追加リクエストを行う
+
+    Parameters:
+      req_body: センシングデータや追加先のドキュメントアドレス
+
+    Returns:
+      res: データ追加が成功したかの情報
+
+    Notes:
+    """
+    return requests.post('https://us-central1-research2022-5j.cloudfunctions.net/addSensingData', json=req_body)
+
   id_token = load_id_token()
 
   if (id_token != 'NULL' and isinstance(temp, float) and isinstance(hum, float)):
@@ -53,7 +67,7 @@ def add(temp: float, hum: float):
       }
     }
 
-    res = requests.post('https://us-central1-research2022-5j.cloudfunctions.net/addSensingData', json=req_body)
+    res = req(req_body)
     print(f'STATUS | {res.status_code}: {res.text}')
   else:
     print('WARN | input variables type not match')

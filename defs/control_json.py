@@ -50,6 +50,7 @@ def load_id_token():
   """
   import json
   import os
+  import requests
   from defs.get_jwt_token import get_jwt_token
   from defs.verify_jwt_token import verify_jwt_token
 
@@ -59,7 +60,22 @@ def load_id_token():
 
   # id_token が存在する場合その値を返す
   if ('id_token' in load_data):
-    return load_data['id_token']
+    req_body = {
+      'token': load_data['id_token']
+    }
+    res = requests.post('https://us-central1-research2022-5j.cloudfunctions.net/checkIdToken', json=req_body)
+
+    if (res.status_code == 200):
+      return load_data['id_token']
+    else:
+      print('WARN | This token may have expired and will be re-requested')
+      get_jwt_token()
+      verify_jwt_token()
+      # token.jsonを開き、データを取得し返す
+      with open(os.getcwd() + '/json/token.json') as f:
+        load_data = json.load(f)
+        return load_data['id_token']
+
   # 存在しなかった場合は get_jwt_token と verify_jwt_token を実行し、id_token を発行処理を行う
   else:
     print('WARN | Cannot found load_data["id_token"]... Run re-request')
