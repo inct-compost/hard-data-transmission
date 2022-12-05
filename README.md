@@ -7,6 +7,8 @@
 IoTコンポストトイレのハードウェアに組み込むプログラム<br>
 Firestoreへのデータの追加処理とFirebaseにアクセスするための認証用プログラム
 
+**This repository sends requests to the back-end server of [back-firebase-functions](https://github.com/inct-compost/back-firebase-functions) to authenticate and add data**
+
 ## Requirement
 | name | version |
 | ------------- | ------------- |
