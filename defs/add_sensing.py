@@ -29,6 +29,9 @@ def add(temp: float, hum: float):
 
   id_token = load_id_token()
 
+  temp = float(temp)
+  hum = float(hum)
+
   if (id_token != 'NULL' and isinstance(temp, float) and isinstance(hum, float)):
     # 今日の日時を取得し保存
     nowDate = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
